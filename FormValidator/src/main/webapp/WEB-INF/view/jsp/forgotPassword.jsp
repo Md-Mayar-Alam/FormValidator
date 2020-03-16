@@ -1,43 +1,18 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 	<head>
 		<script type="text/javascript" src="js/jQuery/3.4.0/jquery.min.js"></script>
-		<script type="text/javascript" src="js/forgotpasswordPopup.js"></script>
-		<link rel="stylesheet" href="css/forgotpasswordPopup.css">
+		<script type="text/javascript" src="js/forgotPassword.js"></script>
+		<link rel="stylesheet" href="css/forgotPassword.css">
 	</head>
 
 	<body>
-		
-		<button class="open-button" onclick="openForm()">
-      		<strong>Open Form</strong>
-      	</button>
-		
-		<h1>HELLO WORLD</h1>
-		<h1>HELLO WORLD</h1>
-		<h1>HELLO WORLD</h1>
-		<h1>HELLO WORLD</h1>
-		<h1>HELLO WORLD</h1>
-		<h1>HELLO WORLD</h1>
-		<h1>HELLO WORLD</h1>
-		<h1>HELLO WORLD</h1>
-		<h1>HELLO WORLD</h1>
-		<h1>HELLO WORLD</h1>
-		
-		
-		<c:choose>
-			<c:when test="${containsError eq true}">
-				<div id="forgotPasswordPopup" class="frgt-pwd-container">
-			</c:when>
-			<c:otherwise>
-				<div id="forgotPasswordPopup" class="hide frgt-pwd-container">
-			</c:otherwise>
-		</c:choose>
+		<div class="frgt-pwd-container">
 			<div class="frgt-pwd-inner-container">
 				<div class="auth-require-fields">
-					<form:form action="/resetPwdPopup" method="post" modelAttribute="forgotPasswordForm">
+					<form:form id="forgotPasswordForm" action="/forgotpassword" method="post" modelAttribute="forgotPasswordForm">
 						<h1>
 							Create new password
 						</h1>
@@ -60,14 +35,8 @@
 						</div>
 						
 						<div class="submit-section">
-							<button id="saveButton" class="submit-section-button" type="submit">
+							<button id="forgotPasswordButton" class="submit-section-button" type="submit">
 								<spring:message code="forgot.password.submit-button-text"></spring:message>
-							</button>
-						</div>
-						
-						<div class="cancel-section">
-							<button id="cancelButton" class="submit-section-button" onclick="closeForm(event)">
-								<spring:message code="forgot.password.cancel-button-text"></spring:message>
 							</button>
 						</div>
 						
@@ -103,5 +72,6 @@
 				
 			</div>
 		</div>
+
 	</body>
 </html>

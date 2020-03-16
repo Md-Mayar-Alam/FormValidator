@@ -1,5 +1,5 @@
 /**
- * javascript file for forgotpassword.jsp
+ * javascript file for dynamicFrgtPwdPopup.jsp
  */
 
 $(document).ready(function(){
@@ -9,6 +9,7 @@ $(document).ready(function(){
 		
 		var isValid= validateFormData(event, password.val(), confirmPassword.val());
 		if(isValid){
+			window.close();
 			$("#forgotPasswordForm").submit();
 		}else{
 			$("#forgotPasswordError").removeClass("hide");
@@ -17,27 +18,46 @@ $(document).ready(function(){
 			return false;
 		}
 	});
+	
+	$("#cancelButton").click(function(){
+		window.close();
+	});
 });
 
 function openForm(){
 	
-	var formId= "forgotPasswordForm";
+	var formID= "forgotPasswordForm";
 	
-	//clearFormErrors(formID);
+	clearFormErrors(formID);
+	
+	var errors= [ $("#forgotPasswordError") ]; 
+	
+	clearDivErrors(errors);
 	
 	$("#forgotPasswordPopup").removeClass("hide");
 }
 
-function clearFormErrors(formID){
-	$("#"+formID).filter(":input").each(function(this){
-		var abc= this.attr("id");
-		
+function clearDivErrors(errors){
+	
+	/*
+	 * filter() creates a new array with elements that fall under a given criteria from an existing array:
+	 */
+	errors.filter(function(index){	
+		return $("[id$='Error']");
+	});
+	
+	$.each(errors, function(){
+		this.addClass("hide");
 	});
 }
 
-function closeForm(e){
-	e.preventDefault();
-	$("#forgotPasswordPopup").addClass("hide");
+function clearFormErrors(formID){
+	
+	var form= $("#"+ formID);
+	
+	$.each($("[id$=errors]", form), function(){	//whose id ends with errors
+		$(this).html("").addClass("hide");
+	});
 }
 
 function validateFormData(event, password, confirmPassword){
@@ -114,20 +134,3 @@ function validateForSpecialCharacter(passwordData){
 	var specialCharRegex= /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
 	return passwordData.match(specialCharRegex) ? true : false;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

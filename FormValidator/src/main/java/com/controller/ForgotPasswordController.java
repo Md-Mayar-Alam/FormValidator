@@ -17,19 +17,19 @@ public class ForgotPasswordController {
 	@Autowired
 	ForgotPasswordValidator forgotPasswordValidator;
 	
-	@RequestMapping(value="/forgotpassword", method= RequestMethod.GET)
+	@RequestMapping(value="/forgotPassword", method= RequestMethod.GET)
 	public String forgotPasswordPage(Model model) {
 		model.addAttribute("forgotPasswordForm", new ForgotPasswordForm());
-		return "forgotpassword";
+		return "forgotPassword";
 	}
 	
-	@RequestMapping(value= "/resetPassword", method= RequestMethod.POST)
+	@RequestMapping(value= "/forgotPassword", method= RequestMethod.POST)
 	public String check(@ModelAttribute("forgotPasswordForm") ForgotPasswordForm forgotPasswordForm, BindingResult bindingResult, Model model) {
 		
 		forgotPasswordValidator.validate(forgotPasswordForm, bindingResult);
 		
 		if (bindingResult.hasErrors()) {
-			return "forgotpassword";
+			return "forgotPassword";
 		}else {
 			return "resetPasswordSuccess";
 		}

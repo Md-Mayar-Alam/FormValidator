@@ -12,27 +12,29 @@ import com.model.ForgotPasswordForm;
 import com.validator.ForgotPasswordValidator;
 
 @Controller
-public class ForgotPasswordPopupController {
+public class DynamicLinkNewTabController {
 
 	@Autowired
 	ForgotPasswordValidator forgotPasswordValidator;
 	
-	@GetMapping("/fogotPasswordPopup")
-	public String fogotPasswordPopup(Model model) {
+	@GetMapping("/dynamicPopup")
+	public String dynamicPopup(Model model) {
+		model.addAttribute("forgotPasswordForm", new ForgotPasswordForm());
 		
+		return "dynamicPopup";
+	}
+	
+	@GetMapping("/dynamicFrgtPwdNewTab")
+	public String dynamicPopupLink(Model model) {
 		model.addAttribute("forgotPasswordForm", new ForgotPasswordForm());
 		model.addAttribute("containsError", false);
-		return "forgotPasswordPopup";
+		return "dynamicFrgtPwdNewTab";
 	}
 	
-	@GetMapping("/fogotPasswordPopup2")
-	public String fogotPasswordPopup2() {
-		return "forgotPasswordPopup2";
-	}
-	
-	@PostMapping("/fogotPasswordPopup")
-	public String resetForgotPwdPopup(@ModelAttribute("forgotPasswordForm")ForgotPasswordForm forgotPasswordForm,
-										BindingResult bindingResult, Model model) {
+	@PostMapping("/dynamicFrgtPwdNewTab")
+	public String dynamicFrgtPwdPopup(@ModelAttribute("forgotPasswordForm")ForgotPasswordForm forgotPasswordForm,
+			BindingResult bindingResult, Model model) {
+		
 		forgotPasswordValidator.validate(forgotPasswordForm, bindingResult);
 		
 		if(bindingResult.hasErrors()) {
